@@ -19,10 +19,10 @@ namespace com.leadingsoft.DingChat
     /// LoginWindow.xaml 的交互逻辑
     /// </summary>
     [Export(typeof(LoginWindow))]
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : BaseWindow
     {
         public LoginWindow()
-        {
+        {          
             InitializeComponent();
         }
     }
