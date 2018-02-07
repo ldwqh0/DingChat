@@ -17,11 +17,14 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                <Button WindowChrome.IsHitTestVisibleInChrome="true" Content="最小化"></Button>
+                                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="true" Content="最小化"/>
                                 <Button WindowChrome.IsHitTestVisibleInChrome="true" Content="最大化"></Button>
-                                <Button WindowChrome.IsHitTestVisibleInChrome="true" Content="关闭"></Button>
+                                <Button WindowChrome.IsHitTestVisibleInChrome="true" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="关闭"></Button>
                             </StackPanel>
                         </Grid>
+                        <AdornerDecorator Grid.Row="1"  >
+                            <ContentControl Content="{TemplateBinding Content}"/>
+                        </AdornerDecorator>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

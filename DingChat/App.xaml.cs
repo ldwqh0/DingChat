@@ -16,7 +16,8 @@ namespace com.leadingsoft.DingChat
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            new Bootstrapper().Run();
+            var app =new Bootstrapper();
+            app.Run();            
         }
     }
 }

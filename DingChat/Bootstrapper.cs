@@ -11,14 +11,16 @@ namespace com.leadingsoft.DingChat
 {
     public class Bootstrapper : MefBootstrapper
     {
+        
         protected override DependencyObject CreateShell()
         {
-            return Container.GetExportedValue<MainWindow>();         
+            return Container.GetExportedValue<MainWindow>();
         }
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            Container.GetExportedValue<LoginWindow>().Show();            
+            Application.Current.MainWindow.Show();
+            //Container.GetExportedValue<MainWindow>().Show();
         }
 
         protected override void ConfigureAggregateCatalog()
