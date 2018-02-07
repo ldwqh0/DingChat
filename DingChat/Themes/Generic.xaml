@@ -6,27 +6,64 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:BaseWindow}">
-                    <Grid Background="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Height="26.4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{TemplateBinding Title}"></TextBlock>
-                            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="true" Content="最小化"/>
-                                <Button WindowChrome.IsHitTestVisibleInChrome="true" Content="最大化"></Button>
-                                <Button WindowChrome.IsHitTestVisibleInChrome="true" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="关闭"></Button>
-                            </StackPanel>
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            x:Name="WindowBorder">
+                        <Grid Background="White" x:Name="Root">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Height="26.4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{TemplateBinding Title}"></TextBlock>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button WindowChrome.IsHitTestVisibleInChrome="true" x:Name="BtnMinimize" IsTabStop="False" Content="最小化" Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
+                                    <Button WindowChrome.IsHitTestVisibleInChrome="true" x:Name="BtnMaximize" IsTabStop="False" Content="最大化" Command="{x:Static SystemCommands.MaximizeWindowCommand}" />
+                                    <Button WindowChrome.IsHitTestVisibleInChrome="true" x:Name="BtnRestore" IsTabStop="False" Visibility="Collapsed" Content="还原" Command="{x:Static SystemCommands.RestoreWindowCommand}"></Button>
+                                    <Button WindowChrome.IsHitTestVisibleInChrome="true" x:Name="BtnClose" IsTabStop="False" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="关闭"></Button>
+                                </StackPanel>
+                            </Grid>
+                            <AdornerDecorator Grid.Row="1"  >
+                                <ContentControl Content="{TemplateBinding Content}"/>
+                            </AdornerDecorator>
                         </Grid>
-                        <AdornerDecorator Grid.Row="1"  >
-                            <ContentControl Content="{TemplateBinding Content}"/>
-                        </AdornerDecorator>
-                    </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Root" Property="Margin" Value="7" />
+                            <Setter TargetName="BtnMaximize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="BtnRestore" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">                            
+                            <Setter TargetName="BtnMaximize" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BtnRestore" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="BtnMaximize"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="BtnRestore"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="BtnMinimize"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter TargetName="BtnMaximize"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="BtnRestore"
+                                    Property="Visibility"
+                                    Value="Collapsed" />                        
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

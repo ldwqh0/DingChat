@@ -7,7 +7,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:view="clr-namespace:com.leadingsoft.DingChat.Views"
         mc:Ignorable="d"
-        Title="鼎信4.0" Height="350" Width="525" WindowStartupLocation="CenterScreen" Loaded="BaseWindow_Loaded">
+        Title="鼎信4.0" Height="350" Width="525" WindowStartupLocation="CenterScreen" Loaded="BaseWindow_Loaded" ResizeMode="CanMinimize">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
